@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Page-wide background: light paper + a subtle pink-grey grid ---- */
+body {
+  position: relative;
+  background-color: theme("colors.paper");
+  background-image: url("data:image/svg+xml,%3Csvg width='34' height='34' viewBox='0 0 34 34' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17 7l1.6 6.4L25 15l-6.4 1.6L17 23l-1.6-6.4L9 15l6.4-1.6L17 7Z' fill='%23f7d8e4' fill-opacity='.75'/%3E%3C/svg%3E");
+  background-size: 34px 34px;
+}
+
+/* Prefer the requested rounded display face when it is available locally,
+   while retaining a close, dependable fallback for every visitor. */
+body, input, button { font-family: var(--font-nunito), "Arial Rounded MT Bold", sans-serif; }
+h1, h2, h3, h4, .font-extrabold { font-family: var(--font-baloo), "Arial Rounded MT Bold", sans-serif; }
+html { font-size: 17px; }
+
+@keyframes am-pop { 0% { transform: scale(.9); } 65% { transform: scale(1.06); } 100% { transform: scale(1); } }
+@keyframes am-fade-up { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes am-float { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-8px) rotate(2deg); } }
+.am-pop { animation: am-pop .32s cubic-bezier(.34,1.56,.64,1); }
+.am-fade-up { animation: am-fade-up .45s ease-out both; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* the two rule-lines that frame every page, per the brand brief */
+.am-margin-l,
+.am-margin-r {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: rgba(236, 90, 150, 0.28);
+  z-index: 1;
+  pointer-events: none;
+}
+.am-margin-l {
+  left: 20px;
+}
+.am-margin-r {
+  right: 20px;
+}
+@media (min-width: 768px) {
+  .am-margin-l { left: 34px; }
+  .am-margin-r { right: 34px; }
+}
+
+/* content sits above the margin-line layer */
+#am-root {
+  position: relative;
+  z-index: 2;
+}
+
+/* wide, visibly-clickable horizontal scrollbars for categories / brand strip / nav pills */
+.scrollbar-wide::-webkit-scrollbar {
+  height: 10px;
+}
+.scrollbar-wide::-webkit-scrollbar-thumb {
+  background: theme("colors.pink-deep");
+  border-radius: 8px;
+}
+.scrollbar-wide::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.04);
+}
+.scrollbar-wide {
+  scrollbar-color: theme("colors.pink-deep") rgba(0, 0, 0, 0.04);
+  scrollbar-width: auto;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}

@@ -1,0 +1,5 @@
+export default function SecureInfo() {
+  return <section className="my-5 rounded-[28px] border-2 border-[#b7dfc8] bg-[#eef8f1]/90 px-5 py-4 sm:px-7 sm:py-5">
+    <div className="flex items-start gap-4"><span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-[#b7dfc8] bg-card text-[#219b63]"><svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3 19 6v5c0 4.7-3 8.5-7 10-4-1.5-7-5.3-7-10V6l7-3Z"/><path d="m9 12 2 2 4-4"/></svg></span><div><h2 className="text-base font-extrabold text-ink">Your information is secure</h2><p className="mt-1 text-sm leading-relaxed text-ink-soft">We ask for your WhatsApp number only so your order reaches the right doorstep. It is shared with credible courier agencies and no one else — never sold, never posted, never used for anything you did not ask for. <a href="/policies" className="font-extrabold text-[#219b63] underline underline-offset-2">Read the privacy policy.</a></p></div></div>
+  </section>;
+}
