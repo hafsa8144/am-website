@@ -3,7 +3,6 @@ import { CartProvider } from "@/lib/cart-context";
 import { SiteProvider } from "@/lib/settings-context";
 import { getCategories, getSiteSettings } from "@/lib/api";
 import "./globals.css";
-import SplashScreen from "@/components/SplashScreen";
 
 const baloo = Baloo_2({
   subsets: ["latin"],
@@ -39,12 +38,6 @@ export default async function RootLayout({ children }) {
       <body className="font-sans text-ink">
         <SiteProvider settings={settings} categories={categories}>
           <CartProvider>
-            <SplashScreen />
-
-            {/* the two rule-lines that frame every page, per the brand brief */}
-            <span className="am-margin-l" aria-hidden="true" />
-            <span className="am-margin-r" aria-hidden="true" />
-
             <div id="am-root">{children}</div>
           </CartProvider>
         </SiteProvider>

@@ -2,7 +2,12 @@
 // (see lib/api.js getReviews), so nothing appears on the site until the shop
 // has approved it in the admin.
 
-const TINTS = ["bg-mint/35", "bg-sky/35", "bg-violet/30", "bg-peach/40"];
+const TINTS = [
+  "bg-[#D9FFF2]",
+  "bg-[#E5F7FF]",
+  "bg-[#EEE5FF]",
+  "bg-[#FFE6DF]",
+];
 
 export function Stars({ rating = 0, className = "" }) {
   const rounded = Math.round(rating);
@@ -99,7 +104,7 @@ export default function Reviews({
           ))}
         </div>
       ) : (
-        <div className="rounded-3xl border border-dashed border-line bg-card/60 py-12 text-center">
+        <div className="rounded-3xl border border-dashed border-line bg-card py-12 text-center">
           <p className="text-3xl">💬</p>
           <p className="mt-3 text-sm font-bold text-ink-soft">{emptyMessage}</p>
         </div>

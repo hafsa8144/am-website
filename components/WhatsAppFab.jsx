@@ -22,7 +22,7 @@ export default function WhatsAppFab() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contact us on WhatsApp"
-      className="group fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full border-2 border-[#72cfc0] bg-mint px-4 py-3 shadow-[0_8px_18px_rgba(163,240,232,.45)] transition hover:-translate-y-1"
+      className="group fixed bottom-6 left-6 z-40 flex items-center gap-2 rounded-full border-2 px-4 py-3 shadow-[0_8px_18px_rgba(163,240,232,.45)] transition hover:-translate-y-1"
     >
       <img
         src="/icons/whatsapp.svg"

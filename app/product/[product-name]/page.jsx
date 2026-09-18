@@ -2,6 +2,7 @@ import PageShell from "@/components/PageShell";
 import ProductDetail from "@/components/ProductDetail";
 import ProductGrid from "@/components/ProductGrid";
 import Reviews from "@/components/Reviews";
+import ReviewForm from "@/components/ReviewForm";
 import {
   getProductBySlug,
   getRelatedProducts,
@@ -52,6 +53,8 @@ export default async function ProductPage({ params }) {
     getReviews({ productSlug: product.slug }),
     getRelatedProducts(product),
   ]);
+
+  <ReviewForm product={product} />
 
   return (
     <PageShell>

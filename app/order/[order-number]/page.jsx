@@ -86,7 +86,7 @@ export default function OrderConfirmationPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[#72cfc0] bg-mint px-5 py-3 text-sm font-extrabold text-ink"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] shadow-[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold text-ink"
           >
             <img
               src="/icons/whatsapp.svg"
@@ -175,12 +175,12 @@ export default function OrderConfirmationPage() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleSend}
-            className="mt-4 flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(37,211,102,.35)] transition hover:-translate-y-0.5"
+            className="mt-4 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(37,211,102,.35)] transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"
               alt=""
-              className="h-5 w-5 object-contain"
+              className="h-5 w-5 object-contain brightness-0"
             />
             {sent ? "Open WhatsApp again" : "Send order on WhatsApp"}
           </a>

@@ -74,7 +74,7 @@ export default function BundleActions({ bundle }) {
         href={buildBundleWhatsAppLink(settings.whatsappNumber, bundle)}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex items-center justify-center gap-2 rounded-full border-2 border-[#72cfc0] bg-mint px-5 py-3 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
+        className="flex items-center justify-center gap-2 rounded-full border-2 px-5 py-3 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
       >
         <img
           src="/icons/whatsapp.svg"

@@ -3,7 +3,6 @@
 import PageShell from "@/components/PageShell";
 import { useCart } from "@/lib/cart-context";
 import { useSiteSettings } from "@/lib/settings-context";
-import { buildOrderWhatsAppLink } from "@/lib/whatsapp";
 import { formatPrice } from "@/lib/strapi";
 
 export default function CartPage() {
@@ -26,7 +25,7 @@ export default function CartPage() {
         <span className="px-2 text-pink-deep">/</span>Your cart
       </nav>
 
-      <div className="mt-5 flex flex-col gap-5 lg:flex-row lg:items-start">
+      <div className="mt-5 flex flex-col gap-5">
         <section className="flex-1 rounded-3xl border border-line bg-card p-5 sm:p-7">
           <div className="flex items-center justify-between">
             <div>
@@ -194,7 +193,7 @@ export default function CartPage() {
           )}
         </section>
 
-        <aside className="rounded-3xl border border-line bg-gradient-to-br from-pink/40 via-lime/35 to-mint/40 p-6 text-ink lg:w-80 lg:shrink-0">
+        <aside className="rounded-3xl border border-line bg-gradient-to-br from-[#FFA3C2] to-[#B2A3FF] p-6 text-ink">
           <h2 className="text-lg font-extrabold">Order summary</h2>
 
           <div className="mt-5 flex justify-between border-t border-ink/10 pt-4 text-sm">
@@ -234,25 +233,7 @@ export default function CartPage() {
             Proceed to checkout
           </a>
 
-          {items.length > 0 && (
-            <a
-              href={buildOrderWhatsAppLink(
-                settings.whatsappNumber,
-                items,
-                subtotal
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 flex items-center justify-center gap-2 rounded-full border-2 border-[#72cfc0] bg-mint px-4 py-3 text-xs font-extrabold text-ink transition hover:-translate-y-0.5"
-            >
-              <img
-                src="/icons/whatsapp.svg"
-                alt=""
-                className="h-5 w-5 object-contain"
-              />
-              Order on WhatsApp instead
-            </a>
-          )}
+          
         </aside>
       </div>
     </PageShell>

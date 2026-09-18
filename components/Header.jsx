@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronIcon } from "./icons";
 import SearchBox from "./SearchBox";
 import { useCart } from "@/lib/cart-context";
-import { useNavCategories, useSiteSettings } from "@/lib/settings-context";
+import { useSiteSettings } from "@/lib/settings-context";
 import { buildContactWhatsAppLink } from "@/lib/whatsapp";
 
 const STATIC_LINKS_START = [
@@ -38,7 +38,6 @@ function TickerLap({ text }) {
 // Nav categories come from the CMS via SiteProvider, so adding a category in
 // Strapi adds it to the nav.
 export default function Header() {
-  const categories = useNavCategories();
   const { count } = useCart();
   const settings = useSiteSettings();
   const pathname = usePathname();
@@ -47,34 +46,51 @@ export default function Header() {
   const [compact, setCompact] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [edges, setEdges] = useState({ left: false, right: false });
-
+  const lastScrollY = useRef(0);
+  const compactLockUntil = useRef(0);
   const navLinks = [
-    ...STATIC_LINKS_START,
-    ...categories
-      .slice(0, 4)
-      .map((category) => [category.name, `/category/${category.slug}`]),
-    ...STATIC_LINKS_END,
-  ];
+  ...STATIC_LINKS_START,
+  ...STATIC_LINKS_END,
+];
 
   useEffect(() => {
-    let frame;
+  let frame;
 
-    const onScroll = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(() => {
-        const y = window.scrollY;
-        setCompact((was) => (was ? y > 56 : y >= 160));
-      });
-    };
+  const onScroll = () => {
+    window.cancelAnimationFrame(frame);
 
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
+    frame = window.requestAnimationFrame(() => {
+      const y = window.scrollY;
+      const goingDown = y > lastScrollY.current;
+      const now = performance.now();
 
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", onScroll);
-    };
-  }, []);
+      if (now < compactLockUntil.current) {
+        lastScrollY.current = y;
+        return;
+      }
+
+      if (!compact && goingDown && y >= 150) {
+        setCompact(true);
+        compactLockUntil.current = now + 450;
+      }
+
+      if (compact && !goingDown && y <= 65) {
+        setCompact(false);
+        compactLockUntil.current = now + 450;
+      }
+
+      lastScrollY.current = y;
+    });
+  };
+
+  lastScrollY.current = window.scrollY;
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    window.cancelAnimationFrame(frame);
+    window.removeEventListener("scroll", onScroll);
+  };
+}, [compact]);
 
   const updateEdges = () => {
     const nav = navRef.current;
@@ -131,19 +147,23 @@ export default function Header() {
           compact ? "py-1.5" : "py-2"
         }`}
       >
-        <div className="relative flex min-h-11 items-center">
+                <div
+  className={`relative flex items-center ${
+    compact ? "min-h-[84px]" : "min-h-[224px]"
+  }`}
+>
           <a
             href="/"
-            className="absolute left-1/2 z-10 -translate-x-1/2"
+            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
             aria-label={`${settings.companyName} home`}
           >
             <img
-              src={settings.logoUrl || "/AM.jpeg"}
-              alt={`${settings.companyName} — ${settings.tagline}`}
-              className={`w-[250px] object-contain transition-all duration-300 sm:w-[280px] ${
-                compact ? "h-12" : "h-20"
-              }`}
-            />
+  src={compact ? "/logo-mark.png" : "/logo-full.png"}
+  alt={`${settings.companyName} — ${settings.tagline}`}
+  className={`w-auto object-contain transition-all duration-300 ${
+    compact ? "h-[84px]" : "h-[208px]"
+  }`}
+/>
           </a>
 
           <div className="ml-auto flex items-center gap-2">
@@ -176,7 +196,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on WhatsApp"
-              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-[#72cfc0] bg-mint transition hover:-translate-y-0.5 sm:grid"
+              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-ink shadow-[0_8px_18px_rgba(178,163,255,.35)] transition hover:-translate-y-0.5 sm:grid"
             >
               <img
                 src="/icons/whatsapp.svg"

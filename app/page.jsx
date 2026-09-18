@@ -3,31 +3,26 @@ import Banner from "@/components/Banner";
 import Categories from "@/components/Categories";
 import ProductGrid from "@/components/ProductGrid";
 import DealsBundles from "@/components/DealsBundles";
-import BrandStrip from "@/components/BrandStrip";
-import Reviews from "@/components/Reviews";
-import TrustRow from "@/components/TrustRow";
 
-import { brandLogos, FALLBACK_BANNERS } from "@/lib/data";
+import {FALLBACK_BANNERS } from "@/lib/data";
 import {
   getBanners,
   getBundles,
   getCategories,
   getProducts,
-  getReviews,
 } from "@/lib/api";
 
 // Rendered on the server: one round of parallel CMS calls, no loading flicker,
 // and the whole home page arrives as HTML.
 export default async function HomePage() {
-  const [banners, categories, promoted, latest, bundles, reviews] =
-    await Promise.all([
-      getBanners(),
-      getCategories({ withProducts: true }),
-      getProducts({ promotedOnly: true, limit: 5 }),
-      getProducts({ limit: 10 }),
-      getBundles(),
-      getReviews({ limit: 6 }),
-    ]);
+  const [banners, categories, promoted, latest, bundles] =
+  await Promise.all([
+    getBanners(),
+    getCategories({ withProducts: true }),
+    getProducts({ promotedOnly: true, limit: 5 }),
+    getProducts({ limit: 10 }),
+    getBundles(),
+  ]);
 
   // Nothing promoted in the CMS yet? Show the newest arrivals instead of an
   // empty shelf.
@@ -65,12 +60,6 @@ export default async function HomePage() {
           ctaHref="/shop"
         />
       )}
-
-      <BrandStrip brands={brandLogos} />
-
-      <Reviews reviews={reviews} />
-
-      <TrustRow />
     </PageShell>
   );
 }

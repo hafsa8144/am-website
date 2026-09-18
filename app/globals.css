@@ -34,16 +34,6 @@ html { font-size: 17px; }
   z-index: 1;
   pointer-events: none;
 }
-.am-margin-l {
-  left: 20px;
-}
-.am-margin-r {
-  right: 20px;
-}
-@media (min-width: 768px) {
-  .am-margin-l { left: 34px; }
-  .am-margin-r { right: 34px; }
-}
 
 /* content sits above the margin-line layer */
 #am-root {

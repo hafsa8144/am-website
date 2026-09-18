@@ -1,7 +1,6 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import BackToTop from "./BackToTop";
-import WhatsAppFab from "./WhatsAppFab";
 
 // Every page renders through here. Header and Footer pull their CMS data from
 // SiteProvider (app/layout.jsx), so this stays a plain component that client
@@ -17,7 +16,7 @@ export default function PageShell({ children }) {
       </main>
 
       <BackToTop />
-      <WhatsAppFab />
+
     </>
   );
 }
