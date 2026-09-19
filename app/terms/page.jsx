@@ -2,11 +2,15 @@ import PageShell from "@/components/PageShell";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const terms = [
-  "Proof of purchase is required for any exchange request.",
-  "Promoted items are not eligible for exchange.",
-  "If an item is faulty, photo or video evidence must be sent within 30 minutes of delivery.",
-  "By starting an order, customers consent to provide the information required to fulfil it.",
-  "Product photographs are representative and an item may differ slightly from its pictured appearance.",
+  "The images of products displayed on the website can vary from the actual product, due to the difference between pictorial demonstration and physical appearance.",
+  "The delivery charges vary on the basis of location, quantity ordered, etc.",
+  "No cash refunds — anything ordered will only be exchanged conditionally, within seven working days, with a product of at least equal value. Products sent for exchange must not be tampered with at all, otherwise the exchange will not be entertained. The delivery charges to send the product for exchange as well as to receive the exchanged product will be paid by customer only.",
+  "We will inform you when your order has to be rescheduled.",
+  "Working hours and days can be changed as per the need of conducting the business.",
+  "Once you have started shopping, you should be fully aware of your actions and the results of those actions, and you should be aware that you are providing your personal information in full consent.",
+  "No exchange will be observed or entertained afterwards without genuine proof of purchase.",
+  "Nothing will be exchanged which falls in the category of promoted products.",
+  "For Lahore city, the minimum order value is Rs. 500. For cities other than Lahore, the minimum order value is Rs. 1000.",
 ];
 
 export const metadata = {

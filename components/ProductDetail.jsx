@@ -6,6 +6,7 @@ import { useSiteSettings } from "@/lib/settings-context";
 import { buildProductWhatsAppLink } from "@/lib/whatsapp";
 import { formatPrice } from "@/lib/strapi";
 import { Stars } from "./Reviews";
+import ImageLightbox from "./ImageLightbox";
 
 // The interactive half of the product page: gallery, colour choice, cart
 // controls and the WhatsApp enquiry. The page itself stays a server component.
@@ -14,7 +15,7 @@ export default function ProductDetail({ product }) {
 
   const [colour, setColour] = useState(colors[0] || null);
   const [activeImage, setActiveImage] = useState(0);
-  const [zoom, setZoom] = useState(false);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const { addItems, items, updateQty, buildCartId } = useCart();
   const settings = useSiteSettings();
@@ -28,30 +29,28 @@ export default function ProductDetail({ product }) {
   return (
     <section className="mt-5 grid gap-7 md:grid-cols-2">
       <div>
-        <button
-          onClick={() => setZoom((on) => !on)}
-          aria-label="Zoom product image"
-          className={`relative grid min-h-80 w-full place-items-center overflow-hidden rounded-3xl border border-line bg-pink/25 transition ${
-            zoom ? "scale-[1.02]" : "hover:border-pink-deep"
-          }`}
+                <button
+          onClick={() => setLightboxOpen(true)}
+          aria-label="View full-size image"
+          className="group relative block aspect-square w-full overflow-hidden rounded-3xl border border-line bg-pink/25 transition hover:border-pink-deep"
         >
           {image ? (
             <img
               src={image.url}
               alt={image.alt || product.name}
-              className={`h-full w-full object-contain p-6 transition duration-300 ${
-                zoom ? "scale-125" : ""
-              }`}
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
             />
           ) : (
-            <div className="grid h-40 w-40 place-items-center rounded-3xl border-2 border-ink bg-card shadow-lift">
+            <div className="grid h-full w-full place-items-center">
               <span className="text-6xl">✎</span>
             </div>
           )}
 
-          <span className="absolute bottom-4 right-4 rounded-full bg-card/90 px-3 py-1.5 text-[11px] font-bold">
-            Click to {zoom ? "reset" : "zoom"}
-          </span>
+          <div className="absolute inset-0 flex items-end justify-end bg-ink/0 p-4 opacity-0 transition duration-300 group-hover:bg-ink/10 group-hover:opacity-100">
+            <span className="rounded-full bg-card/90 px-3 py-1.5 text-[11px] font-bold">
+              Click to zoom
+            </span>
+          </div>
         </button>
 
         {product.images.length > 1 && (
@@ -76,6 +75,15 @@ export default function ProductDetail({ product }) {
             ))}
           </div>
         )}
+
+        <ImageLightbox
+          images={product.images}
+          initialIndex={activeImage}
+          open={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          onIndexChange={setActiveImage}
+          productName={product.name}
+        />
       </div>
 
       <div>

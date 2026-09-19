@@ -38,7 +38,7 @@ export default async function HomePage() {
     <PageShell>
       <Banner slides={banners.length > 0 ? banners : FALLBACK_BANNERS} />
 
-      <Categories categories={categories} />
+      <Categories categories={categories.slice(0, 10)} />
 
       <ProductGrid
         products={spotlight}
