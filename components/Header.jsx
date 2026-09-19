@@ -27,10 +27,14 @@ const STATIC_LINKS_END = [
 // show a gap. ~300px per repeat × 10 ≈ 3000px, safe up to ultrawide.
 const TICKER_REPEATS = 10;
 
-function TickerLap({ text }) {
+function TickerLap({ items }) {
   return Array.from({ length: TICKER_REPEATS }).map((_, i) => (
-    <span key={i} className="pr-14">
-      {text}
+    <span key={i} className="inline-flex">
+      {items.map((item, j) => (
+        <span key={j} className="pr-14">
+          {item}
+        </span>
+      ))}
     </span>
   ));
 }
@@ -125,9 +129,9 @@ export default function Header() {
       >
         <div className="flex items-center gap-3 border-b border-line px-4 py-1.5 text-[15px] sm:px-6">
           <div className="min-w-0 flex-1 overflow-hidden">
-            <div className="w-max animate-[scroll-left_50s_linear_infinite] whitespace-nowrap font-extrabold text-pink-deep">
-              <TickerLap text={settings.announcementText} />
-              <TickerLap text={settings.announcementText} />
+            <div className="w-max animate-[scroll-left_120s_linear_infinite] whitespace-nowrap font-extrabold text-pink-deep">
+              <TickerLap items={settings.announcementItems || []} />
+<TickerLap items={settings.announcementItems || []} />
             </div>
           </div>
 
@@ -135,10 +139,18 @@ export default function Header() {
             {settings.openingHours}
           </span>
 
-          <span className="hidden shrink-0 font-bold lg:block">
-            {settings.landlineNumber && <>📞 {settings.landlineNumber} &nbsp;</>}
-            {settings.phoneNumber && <>💬 {settings.phoneNumber}</>}
-          </span>
+          <span className="hidden shrink-0 items-center gap-1.5 font-bold lg:flex">
+  {settings.phoneNumber && (
+    <>
+      <img
+        src="/icons/whatsapp.svg"
+        alt=""
+        className="h-5 w-5 object-contain"
+      />
+      {settings.phoneNumber}
+    </>
+  )}
+</span>
         </div>
       </div>
 
@@ -247,10 +259,12 @@ export default function Header() {
             <ChevronIcon direction="left" className="h-4 w-4" />
           </button>
 
-          <nav
+                    <nav
             ref={navRef}
             onScroll={updateEdges}
-            className="no-scrollbar mt-2 flex gap-2.5 overflow-x-auto scroll-smooth px-1 py-2.5"
+            className={`no-scrollbar mt-2 flex gap-2.5 overflow-x-auto scroll-smooth px-1 py-2.5 ${
+              edges.left || edges.right ? "justify-start" : "justify-center"
+            }`}
           >
             {navLinks.map(([label, href]) => {
               const active =
