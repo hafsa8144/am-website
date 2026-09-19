@@ -208,7 +208,7 @@ export default function Header() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on WhatsApp"
-              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-ink shadow-[0_8px_18px_rgba(178,163,255,.35)] transition hover:-translate-y-0.5 sm:grid"
+              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-ink transition hover:-translate-y-0.5 sm:grid"
             >
               <img
                 src="/icons/whatsapp.svg"
