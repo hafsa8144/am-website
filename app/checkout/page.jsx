@@ -341,7 +341,7 @@ export default function CheckoutPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-ink shadow-[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-white -[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"

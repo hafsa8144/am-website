@@ -193,11 +193,11 @@ export default function CartPage() {
           )}
         </section>
 
-        <aside className="rounded-3xl border border-line bg-gradient-to-br from-[#FFA3C2] to-[#B2A3FF] p-6 text-ink">
+        <aside className="rounded-3xl border border-line bg-ink p-6 text-white">
           <h2 className="text-lg font-extrabold">Order summary</h2>
 
           <div className="mt-5 flex justify-between border-t border-ink/10 pt-4 text-sm">
-            <span className="text-ink-soft">Subtotal</span>
+            <span className="text-white">Subtotal</span>
             <strong>{formatPrice(subtotal)}</strong>
           </div>
 
@@ -210,7 +210,7 @@ export default function CartPage() {
                 />
               </div>
 
-              <p className="mt-2 text-[11px] font-bold text-ink">
+              <p className="mt-2 text-[11px] font-bold text-white">
                 {remaining > 0
                   ? `${formatPrice(remaining)} more for free shipping`
                   : "You have unlocked free shipping 🎉"}

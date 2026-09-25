@@ -192,7 +192,7 @@ export default function Header() {
               aria-label="Open search"
               className={`${
                 compact ? "grid" : "grid lg:hidden"
-              } group h-12 w-12 place-items-center rounded-full border-2 border-line bg-card transition hover:-translate-y-0.5 hover:border-pink-deep hover:bg-pink/10 ${
+              } group h-12 w-12 place-items-center rounded-full border-2 border-line bg-card transition hover:-translate-y-0.5 hover:border-pink hover:bg-pink/10 ${
                 searchOpen ? "bg-pink/20" : ""
               }`}
             >
@@ -277,7 +277,7 @@ export default function Header() {
                   href={href}
                   className={`shrink-0 rounded-full border px-6 py-3 text-[15px] font-extrabold transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 ${
                     active || featured
-                      ? "border-transparent bg-gradient-to-r from-peach to-pink text-ink"
+                      ? "border-transparent bg-pink text-white"
                       : "border-line bg-card hover:border-pink-deep hover:bg-pink/10"
                   }`}
                 >

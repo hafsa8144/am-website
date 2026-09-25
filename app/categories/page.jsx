@@ -29,12 +29,12 @@ export default async function CategoriesPage() {
         <span>Categories</span>
       </nav>
 
-      <section className="relative mt-5 overflow-hidden rounded-3xl bg-gradient-to-br from-pink-deep via-pink to-peach px-6 py-10 shadow-soft sm:px-10 sm:py-14">
+      <section className="relative mt-5 overflow-hidden rounded-3xl bg-ink px-6 py-10 shadow-soft sm:px-10 sm:py-14">
         <span className="absolute -right-14 -top-20 h-64 w-64 rounded-full bg-white/15" />
         <span className="absolute -bottom-24 -left-16 h-52 w-52 rounded-full border-[24px] border-white/15" />
 
         <div className="relative max-w-xl">
-          <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-white/75">
+          <p className="text-[11px] font-extrabold uppercase tracking-[0.18em] text-white">
             Shop your way
           </p>
 

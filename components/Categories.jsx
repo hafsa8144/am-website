@@ -17,7 +17,7 @@ export default function Categories({ categories = [] }) {
             Shop by category
           </h2>
 
-          <span className="mt-2 block h-2 w-20 rounded-full bg-gradient-to-r from-pink to-peach" />
+          <span className="mt-2 block h-2 w-20 rounded-full bg-ink" />
 
           <p className="mt-3 text-sm font-semibold text-ink-soft sm:text-base">
             Everything at AM, neatly organised for you.
