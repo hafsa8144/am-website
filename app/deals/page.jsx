@@ -29,16 +29,16 @@ export default async function DealsPage() {
         <span>Deals &amp; Bundles</span>
       </nav>
 
-      <section className="mt-2 rounded-3xl bg-gradient-to-br from-mint/45 to-sky/35 p-7 sm:p-10">
-        <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-pink-deep">
+      <section className="mt-2 rounded-3xl bg-ink p-7 sm:p-10">
+        <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-white">
           Better together
         </p>
 
-        <h1 className="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
           Deals &amp; bundles
         </h1>
 
-        <p className="mt-2 max-w-2xl text-sm text-ink-soft">
+        <p className="mt-2 max-w-2xl text-sm text-white">
           Grab your favourite essentials together and save more.
         </p>
       </section>

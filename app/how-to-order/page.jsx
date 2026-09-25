@@ -1,5 +1,4 @@
 import PageShell from "@/components/PageShell";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Mirrors what the site actually does now: the confirmation page hands the
 // customer a ready-to-send WhatsApp message with their full order.
@@ -51,7 +50,7 @@ export default function HowToOrderPage() {
               key={number}
               className="flex gap-4 rounded-3xl border border-line bg-card p-5 transition hover:-translate-y-1 hover:shadow-lift"
             >
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-pink to-violet font-extrabold text-white">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-pink text-white">
                 {number}
               </span>
 
@@ -66,12 +65,10 @@ export default function HowToOrderPage() {
         <div className="mt-7 flex flex-wrap items-center gap-3">
           <a
             href="/shop"
-            className="rounded-full bg-pink-deep px-5 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5"
+            className="rounded-full bg-pink px-5 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5"
           >
             Start shopping
           </a>
-
-          <WhatsAppButton context="how ordering works" />
         </div>
       </section>
     </PageShell>

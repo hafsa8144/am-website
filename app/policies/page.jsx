@@ -1,5 +1,4 @@
 import PageShell from "@/components/PageShell";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 const points = [
   "We collect your information only for the purpose of delivering your order properly.",
@@ -45,7 +44,6 @@ export default function PoliciesPage() {
           </ul>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <WhatsAppButton context="your privacy and delivery policy" />
 
             <a
               href="/terms"

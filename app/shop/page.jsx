@@ -52,16 +52,16 @@ export default async function ShopPage({ searchParams }) {
         Shop
       </nav>
 
-      <section className="mt-5 rounded-3xl bg-gradient-to-br from-sky/45 to-violet/35 p-7 sm:p-10">
-        <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-pink-deep">
+      <section className="mt-5 rounded-3xl bg-ink p-7 sm:p-10">
+        <p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-white">
           The AM shelf
         </p>
 
-        <h1 className="mt-2 text-3xl font-extrabold sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-extrabold sm:text-4xl text-white">
           {current ? current.name : "All products"}
         </h1>
 
-        <p className="mt-2 text-sm text-ink-soft">
+        <p className="mt-2 text-sm text-white">
           {current?.description ||
             "Everything currently available in one easy place."}
         </p>

@@ -8,6 +8,7 @@ import { useCart } from "@/lib/cart-context";
 import { useSiteSettings } from "@/lib/settings-context";
 import { buildContactWhatsAppLink } from "@/lib/whatsapp";
 
+
 const STATIC_LINKS_START = [
   ["Home", "/"],
   ["Shop", "/shop"],
@@ -27,6 +28,10 @@ const STATIC_LINKS_END = [
 // show a gap. ~300px per repeat × 10 ≈ 3000px, safe up to ultrawide.
 const TICKER_REPEATS = 10;
 
+// Every collapsing piece of the header shares this duration + easing so
+// they move in lockstep instead of drifting out of sync with each other.
+const COLLAPSE_TRANSITION = "duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]";
+
 function TickerLap({ items }) {
   return Array.from({ length: TICKER_REPEATS }).map((_, i) => (
     <span key={i} className="inline-flex">
@@ -45,56 +50,76 @@ export default function Header() {
   const { count } = useCart();
   const settings = useSiteSettings();
   const pathname = usePathname();
-
+  const searchRef = useRef(null);
   const navRef = useRef(null);
   const [compact, setCompact] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [edges, setEdges] = useState({ left: false, right: false });
   const lastScrollY = useRef(0);
   const compactLockUntil = useRef(0);
-  const navLinks = [
-  ...STATIC_LINKS_START,
-  ...STATIC_LINKS_END,
-];
+  const navLinks = [...STATIC_LINKS_START, ...STATIC_LINKS_END];
+
 
   useEffect(() => {
-  let frame;
+  if (!searchOpen) return;
 
-  const onScroll = () => {
-    window.cancelAnimationFrame(frame);
-
-    frame = window.requestAnimationFrame(() => {
-      const y = window.scrollY;
-      const goingDown = y > lastScrollY.current;
-      const now = performance.now();
-
-      if (now < compactLockUntil.current) {
-        lastScrollY.current = y;
-        return;
-      }
-
-      if (!compact && goingDown && y >= 150) {
-        setCompact(true);
-        compactLockUntil.current = now + 450;
-      }
-
-      if (compact && !goingDown && y <= 65) {
-        setCompact(false);
-        compactLockUntil.current = now + 450;
-      }
-
-      lastScrollY.current = y;
-    });
+  const onClickOutside = (event) => {
+    if (searchRef.current && !searchRef.current.contains(event.target)) {
+      setSearchOpen(false);
+    }
   };
 
-  lastScrollY.current = window.scrollY;
-  window.addEventListener("scroll", onScroll, { passive: true });
+  const onKeyDown = (event) => {
+    if (event.key === "Escape") setSearchOpen(false);
+  };
+
+  document.addEventListener("mousedown", onClickOutside);
+  window.addEventListener("keydown", onKeyDown);
 
   return () => {
-    window.cancelAnimationFrame(frame);
-    window.removeEventListener("scroll", onScroll);
+    document.removeEventListener("mousedown", onClickOutside);
+    window.removeEventListener("keydown", onKeyDown);
   };
-}, [compact]);
+}, [searchOpen]);
+
+  useEffect(() => {
+    let frame;
+
+    const onScroll = () => {
+      window.cancelAnimationFrame(frame);
+
+      frame = window.requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const goingDown = y > lastScrollY.current;
+        const now = performance.now();
+
+        if (now < compactLockUntil.current) {
+          lastScrollY.current = y;
+          return;
+        }
+
+        if (!compact && goingDown && y >= 150) {
+          setCompact(true);
+          compactLockUntil.current = now + 450;
+        }
+
+        if (compact && !goingDown && y <= 65) {
+          setCompact(false);
+          compactLockUntil.current = now + 450;
+        }
+
+        lastScrollY.current = y;
+      });
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [compact]);
 
   const updateEdges = () => {
     const nav = navRef.current;
@@ -123,7 +148,7 @@ export default function Header() {
     <header className="sticky top-0 z-30 border-b border-line bg-paper/95 shadow-[0_5px_18px_rgba(42,36,56,.05)] backdrop-blur-md">
       {/* announcement + contact bar */}
       <div
-        className={`overflow-hidden transition-[max-height,opacity] duration-300 ${
+        className={`overflow-hidden transition-[max-height,opacity] ${COLLAPSE_TRANSITION} ${
           compact ? "max-h-0 opacity-0" : "max-h-9 opacity-100"
         }`}
       >
@@ -131,7 +156,7 @@ export default function Header() {
           <div className="min-w-0 flex-1 overflow-hidden">
             <div className="w-max animate-[scroll-left_120s_linear_infinite] whitespace-nowrap font-extrabold text-pink-deep">
               <TickerLap items={settings.announcementItems || []} />
-<TickerLap items={settings.announcementItems || []} />
+              <TickerLap items={settings.announcementItems || []} />
             </div>
           </div>
 
@@ -140,69 +165,77 @@ export default function Header() {
           </span>
 
           <span className="hidden shrink-0 items-center gap-1.5 font-bold lg:flex">
-  {settings.phoneNumber && (
-    <>
-      <img
-        src="/icons/whatsapp.svg"
-        alt=""
-        className="h-5 w-5 object-contain"
-      />
-      {settings.phoneNumber}
-    </>
-  )}
-</span>
+            {settings.phoneNumber && (
+              <>
+                <img
+                  src="/icons/whatsapp.svg"
+                  alt=""
+                  className="h-5 w-5 object-contain"
+                />
+                {settings.phoneNumber}
+              </>
+            )}
+          </span>
         </div>
       </div>
 
       <div
-        className={`mx-auto max-w-[85rem] px-4 transition-all duration-500 sm:px-7 ${
-          compact ? "py-1.5" : "py-2"
+        className={`mx-auto max-w-[85rem] px-4 transition-[padding] ${COLLAPSE_TRANSITION} sm:px-7 ${
+          compact ? "py-1" : "py-2"
         }`}
       >
-                <div
-  className={`relative flex items-center ${
-    compact ? "min-h-[84px]" : "min-h-[224px]"
-  }`}
->
+         <div
+          className={`relative flex items-center transition-[min-height] ${COLLAPSE_TRANSITION} ${
+            compact ? "min-h-[56px]" : "min-h-[128px]"
+          }`}
+        >
           <a
+                      
             href="/"
             className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
             aria-label={`${settings.companyName} home`}
           >
             <img
-  src={compact ? "/logo-mark.png" : "/logo-full.png"}
-  alt={`${settings.companyName} — ${settings.tagline}`}
-  className={`w-auto object-contain transition-all duration-300 ${
-    compact ? "h-[84px]" : "h-[208px]"
-  }`}
-/>
+              src={compact ? "/logo-mark.png" : "/logo-full.png"}
+              alt={`${settings.companyName} — ${settings.tagline}`}
+              style={{ willChange: "height" }}
+              className={`w-auto object-contain transition-[height] ${COLLAPSE_TRANSITION} ${
+                compact ? "h-[84px]" : "h-[208px]"
+              }`}
+            />
           </a>
 
-          <div className="ml-auto flex items-center gap-2">
+                    <div className="ml-auto flex items-center gap-2">
             <div
-              className={`hidden w-[350px] transition-all duration-300 lg:block ${
+              className={`hidden w-[350px] transition-[opacity,width] ${COLLAPSE_TRANSITION} lg:block ${
                 compact ? "invisible w-0 opacity-0" : ""
               }`}
             >
               <SearchBox />
             </div>
 
-            <button
-              onClick={() => setSearchOpen((open) => !open)}
-              aria-label="Open search"
-              className={`${
+            <div
+              ref={searchRef}
+              className={`h-12 overflow-hidden transition-[width] ${COLLAPSE_TRANSITION} ${
                 compact ? "grid" : "grid lg:hidden"
-              } group h-12 w-12 place-items-center rounded-full border-2 border-line bg-card transition hover:-translate-y-0.5 hover:border-pink hover:bg-pink/10 ${
-                searchOpen ? "bg-pink/20" : ""
-              }`}
+              } ${searchOpen ? "w-[190px] xs:w-[230px] sm:w-[300px]" : "w-12"}`}
             >
-              <img
-                src="/icons/search.png"
-                alt="Search"
-                className="h-6 w-6 object-contain transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
-              />
-            </button>
-
+              {searchOpen ? (
+                <SearchBox className="w-full" onDone={() => setSearchOpen(false)} />
+              ) : (
+                <button
+                  onClick={() => setSearchOpen(true)}
+                  aria-label="Open search"
+                  className="group grid h-12 w-12 place-items-center rounded-full border-2 border-line bg-card transition hover:-translate-y-0.5 hover:border-pink hover:bg-pink/10"
+                >
+                  <img
+                    src="/icons/search.png"
+                    alt="Search"
+                    className="h-6 w-6 object-contain transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-110"
+                  />
+                </button>
+              )}
+            </div>
             <a
               href={buildContactWhatsAppLink(settings.whatsappNumber)}
               target="_blank"
@@ -228,25 +261,15 @@ export default function Header() {
                 className="h-6 w-6 object-contain"
               />
 
-              <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-pink-deep text-[9px] font-bold text-white">
+              <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-pink text-[9px] font-bold text-white">
                 {count}
               </span>
             </a>
           </div>
-        </div>
-
-        <div
-          className={`grid overflow-hidden transition-all duration-300 ${
-            searchOpen ? "grid-rows-[1fr] pt-3 opacity-100" : "grid-rows-[0fr] opacity-0"
-          }`}
-        >
-          <div className="min-h-0">
-            <SearchBox onDone={() => setSearchOpen(false)} />
           </div>
-        </div>
 
         <div
-          className={`relative overflow-hidden transition-[max-height,opacity] duration-300 ${
+          className={`relative overflow-hidden transition-[max-height,opacity] ${COLLAPSE_TRANSITION} ${
             compact ? "max-h-0 opacity-0" : "max-h-20 opacity-100"
           }`}
         >
@@ -259,7 +282,7 @@ export default function Header() {
             <ChevronIcon direction="left" className="h-4 w-4" />
           </button>
 
-                    <nav
+          <nav
             ref={navRef}
             onScroll={updateEdges}
             className={`no-scrollbar mt-2 flex gap-2.5 overflow-x-auto scroll-smooth px-1 py-2.5 ${

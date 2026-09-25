@@ -13,16 +13,18 @@ export default function Categories({ categories = [] }) {
     <section className="py-9">
       <div className="mb-5 flex items-end gap-4">
         <div>
-          <h2 className="text-2xl font-extrabold text-ink sm:text-4xl">
-            Shop by category
-          </h2>
+  <div className="inline-block">
+    <h2 className="text-2xl font-extrabold text-ink sm:text-4xl">
+      Shop by category
+    </h2>
 
-          <span className="mt-2 block h-2 w-20 rounded-full bg-ink" />
+    <span className="mt-2 block h-2 w-full rounded-full bg-pink" />
+  </div>
 
-          <p className="mt-3 text-sm font-semibold text-ink-soft sm:text-base">
-            Everything at AM, neatly organised for you.
-          </p>
-        </div>
+  <p className="mt-3 text-sm font-semibold text-ink-soft sm:text-base">
+    Everything at AM, neatly organised for you.
+  </p>
+</div>
 
         <a
           href="/categories"

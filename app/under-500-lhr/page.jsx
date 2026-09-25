@@ -21,16 +21,16 @@ export default async function Under500Page() {
         Under Rs. 500
       </nav>
 
-      <section className="mt-5 rounded-3xl bg-gradient-to-br from-violet/65 to-pink/45 p-7 sm:p-10">
-        <p className="text-[11px] font-extrabold uppercase tracking-[.15em] text-pink-deep">
+      <section className="mt-5 rounded-3xl bg-ink p-7 sm:p-10">
+        <p className="text-[11px] font-extrabold uppercase tracking-[.15em] text-white">
           Lahore only
         </p>
 
-        <h1 className="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-extrabold text-white sm:text-4xl">
           Small finds under Rs. 500
         </h1>
 
-        <p className="mt-2 text-sm text-ink-soft">
+        <p className="mt-2 text-sm text-white">
           A handpicked selection for LHR customers. Delivery is discussed on
           WhatsApp.
         </p>

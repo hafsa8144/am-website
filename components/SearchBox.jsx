@@ -75,7 +75,7 @@ export default function SearchBox({ onDone, className = "" }) {
         <button
           type="submit"
           onClick={onDone}
-          className="hidden rounded-full bg-pink-deep px-4 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5 hover:brightness-105 sm:block"
+          className="hidden rounded-full bg-pink px-4 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5 sm:block"
         >
           Search
         </button>

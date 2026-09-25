@@ -194,7 +194,7 @@ export default function ProductCard({ product, accent = "pink" }) {
         ) : (
           <button
             onClick={() => addItems(1, product, color)}
-            className="w-full rounded-full bg-pink-deep py-2 text-[12.5px] font-bold text-white transition hover:-translate-y-0.5 hover:brightness-105 active:scale-95"
+            className="w-full rounded-full bg-pink py-2 text-[12.5px] font-bold text-white transition hover:-translate-y-0.5 active:scale-95"
           >
             Add to cart
           </button>

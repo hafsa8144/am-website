@@ -196,29 +196,12 @@ export default function CartPage() {
         <aside className="rounded-3xl border border-line bg-ink p-6 text-white">
           <h2 className="text-lg font-extrabold">Order summary</h2>
 
-          <div className="mt-5 flex justify-between border-t border-ink/10 pt-4 text-sm">
+          <div className="mt-5 flex justify-between border-t border-white pt-4 text-sm">
             <span className="text-white">Subtotal</span>
             <strong>{formatPrice(subtotal)}</strong>
           </div>
 
-          {threshold > 0 && items.length > 0 && (
-            <div className="mt-4">
-              <div className="h-2 overflow-hidden rounded-full bg-card/70">
-                <div
-                  className="h-full rounded-full bg-pink-deep transition-all"
-                  style={{ width: `${progress}%` }}
-                />
-              </div>
-
-              <p className="mt-2 text-[11px] font-bold text-white">
-                {remaining > 0
-                  ? `${formatPrice(remaining)} more for free shipping`
-                  : "You have unlocked free shipping 🎉"}
-              </p>
-            </div>
-          )}
-
-          <p className="mt-4 rounded-2xl bg-card/70 p-3 text-[11px] leading-relaxed text-ink-soft">
+          <p className="text-[13px] leading-relaxed text-white">
             {settings.deliveryNote}
           </p>
 

@@ -297,18 +297,18 @@ export default function CheckoutPage() {
         </div>
 
         {/* the cart, carried through to checkout so nothing has to be re-checked */}
-        <aside className="rounded-3xl border border-line bg-gradient-to-br from-pink/35 via-lime/30 to-mint/35 p-6">
-          <h2 className="text-lg font-extrabold">Your order</h2>
+        <aside className="rounded-3xl border border-line bg-ink p-6">
+          <h2 className="text-lg font-extrabold text-white">Your order</h2>
 
           <div className="mt-4 space-y-2">
             {items.map((item) => (
               <div
                 key={item.id}
-                className="flex items-start justify-between gap-3 text-sm"
+                className="flex items-start justify-between gap-3 text-sm text-white"
               >
                 <span className="min-w-0 flex-1">
                   <span className="block truncate font-bold">{item.name}</span>
-                  <span className="text-[11px] text-ink-soft">
+                  <span className="text-[11px] text-white">
                     × {item.qty}
                     {item.color ? ` · ${item.color.name}` : ""}
                   </span>
@@ -321,9 +321,9 @@ export default function CheckoutPage() {
             ))}
           </div>
 
-          <div className="mt-4 flex justify-between border-t border-ink/10 pt-3 text-sm">
-            <span className="text-ink-soft">Subtotal</span>
-            <strong>{formatPrice(subtotal)}</strong>
+          <div className="mt-4 flex justify-between border-t border-white pt-3 text-sm">
+            <span className="text-white">Subtotal</span>
+            <strong className="text-white">{formatPrice(subtotal)}</strong>
           </div>
 
           <a
@@ -341,7 +341,7 @@ export default function CheckoutPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-white -[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-pink bg-pink text-ink -[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"

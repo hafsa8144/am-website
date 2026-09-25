@@ -1,5 +1,4 @@
 import PageShell from "@/components/PageShell";
-import WhatsAppButton from "@/components/WhatsAppButton";
 
 const terms = [
   "The images of products displayed on the website can vary from the actual product, due to the difference between pictorial demonstration and physical appearance.",
@@ -50,8 +49,6 @@ export default function TermsPage() {
           </ol>
 
           <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
-            <WhatsAppButton context="your terms and conditions" />
-
             <a
               href="/policies"
               className="text-xs font-extrabold text-pink-deep hover:underline"

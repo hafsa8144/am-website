@@ -57,8 +57,8 @@ export default function Footer() {
 
           <p className="mt-4 max-w-[285px] text-sm leading-relaxed text-ink-soft">
             {settings.tagline}
-            {settings.addressLine ? ` — ${settings.addressLine}.` : "."} Order on
-            WhatsApp and we deliver across Lahore and the rest of Pakistan.
+            {settings.addressLine ? ` — ${settings.addressLine}.` : "."} You can also order on
+            WhatsApp, we deliver across Lahore and the rest of Pakistan.
           </p>
 
           {socials.length > 0 && (
@@ -77,6 +77,11 @@ export default function Footer() {
               ))}
             </div>
           )}
+           <img
+  src="/icons/secure-shield.png"
+  alt=""
+  className="mx-auto mt-6 block h-44 w-44 object-contain"
+/>   
         </div>
 
         {[
@@ -86,7 +91,7 @@ export default function Footer() {
           <div key={heading}>
             <h2 className="text-lg font-extrabold text-ink">{heading}</h2>
 
-            <span className="mt-2 block h-1.5 w-14 rounded-full bg-gradient-to-r from-pink to-peach" />
+            <span className="mt-2 block h-1.5 w-14 rounded-full bg-pink" />
 
             <ul className="mt-5 space-y-2.5">
               {links.map(([label, href]) => (
@@ -106,7 +111,7 @@ export default function Footer() {
         <div>
           <h2 className="text-lg font-extrabold text-ink">Reach us</h2>
 
-          <span className="mt-2 block h-1.5 w-14 rounded-full bg-gradient-to-r from-pink to-peach" />
+          <span className="mt-2 block h-1.5 w-14 rounded-full bg-pink" />
 
           <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink-soft">
             <p>
@@ -164,36 +169,17 @@ export default function Footer() {
           </a>
         </div>
       </div>
-
-      <section className="my-6 rounded-[28px] border-2 border-[#b7dfc8] bg-[#eef8f1]/90 px-5 py-4 sm:px-7 sm:py-5">
-        <div className="flex items-start gap-4">
-          <img
-  src="/icons/secure-shield.png"
-  alt=""
-  className="h-20 w-20 shrink-0 object-contain sm:h-24 sm:w-24"
-/>
-
-          <div>
-            <h2 className="text-base font-extrabold text-ink">
-              {settings.trustBadgeText}
-            </h2>
-
-            <p className="mt-1 text-sm leading-relaxed text-ink-soft">
-              We ask for your WhatsApp number only so your order reaches the
-              right doorstep. It is shared with credible courier agencies and no
-              one else — never sold, never posted, never used for anything you
-              did not ask for.{" "}
-              <a
-                href="/policies"
-                className="font-extrabold text-[#219b63] underline underline-offset-2"
-              >
-                Read the privacy policy.
-              </a>
-            </p>
-          </div>
-        </div>
-      </section>
-
+            <div className="mt-8 overflow-hidden rounded-3xl border border-line">
+        <iframe
+          title="Our location on the map"
+          src="https://www.google.com/maps?q=31.573146404526042,74.30960932095441&output=embed"
+          width="100%"
+          height="220"
+          style={{ border: 0 }}
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
+      </div>
       <div className="flex flex-col justify-between gap-2 border-t border-line py-4 text-[11px] font-semibold text-ink-soft sm:flex-row">
         <p>
           © {new Date().getFullYear()} {settings.companyName}. All rights
