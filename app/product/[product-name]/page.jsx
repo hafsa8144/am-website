@@ -96,6 +96,7 @@ export default async function ProductPage({ params }) {
         subtitle={`What customers think of the ${product.name}.`}
         emptyMessage="No reviews for this product yet."
       />
+       <ReviewForm product={product} />
 
       {related.length > 0 && (
         <ProductGrid

@@ -40,8 +40,7 @@ function ChartGlyph({ stroke }) {
   );
 }
 
-// `product` is always a normalised product from lib/strapi.js, so this card
-// does no CMS parsing of its own.
+// `product` is always a normalised product from lib/strapi.js.
 export default function ProductCard({ product, accent = "pink" }) {
   const colors = product.colors || [];
   const [color, setColor] = useState(colors[0] || null);
@@ -52,7 +51,9 @@ export default function ProductCard({ product, accent = "pink" }) {
   const inCart = items.find((item) => item.id === cartId);
 
   const href = `/product/${product.slug}`;
-  const soldOut = !product.inStock;
+
+  // Stock is managed directly from Strapi.
+  const soldOut = Number(product.stock || 0) <= 0;
 
   return (
     <div className="flex h-full min-w-0 flex-col rounded-2xl border border-line bg-card p-3.5 transition-all duration-150 hover:-translate-y-1 hover:border-pink-deep hover:shadow-lift">
@@ -91,16 +92,20 @@ export default function ProductCard({ product, accent = "pink" }) {
         ) : (
           <div className="grid h-full w-full place-items-center">
             <div className="h-16 w-16 rounded-xl border-2 border-ink/80 bg-white p-1.5 shadow-sm">
-              <ChartGlyph stroke={ACCENT_STROKE[accent] || ACCENT_STROKE.pink} />
+              <ChartGlyph
+                stroke={ACCENT_STROKE[accent] || ACCENT_STROKE.pink}
+              />
             </div>
           </div>
         )}
       </a>
 
+      {/* Brand */}
       <p className="min-h-[15px] text-[10px] font-bold uppercase tracking-wide text-ink-soft">
         {product.brand}
       </p>
 
+      {/* Product title */}
       <a
         href={href}
         className="mt-0.5 block min-h-[34px] text-[13px] font-bold leading-tight text-ink hover:text-pink-deep"
@@ -108,31 +113,58 @@ export default function ProductCard({ product, accent = "pink" }) {
         {product.name}
       </a>
 
-      {product.rating ? (
-        <p className="mt-1 text-[10.5px] font-bold text-ink-soft">
-          <span className="text-pink-deep">★</span> {product.rating.toFixed(1)}
-          <span className="font-semibold"> ({product.reviewCount})</span>
-        </p>
-      ) : (
-        product.description && (
-          <p className="mt-1 min-h-[30px] line-clamp-2 text-[11px] leading-relaxed text-ink-soft">
-            {product.description}
-          </p>
-        )
+      {/* Tags */}
+      {product.tags?.length > 0 && (
+        <div className="mt-1.5 flex flex-wrap gap-1">
+          {product.tags.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full bg-pink/15 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wide text-pink-deep"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
       )}
 
-      <div className="my-1.5 flex items-baseline gap-1.5">
-        <p className="text-[13.5px] font-extrabold text-pink-deep">
-          {formatPrice(product.price)}
+      {/* Description */}
+      {product.description && (
+        <p className="mt-2 min-h-[30px] line-clamp-2 text-[11px] leading-relaxed text-ink-soft">
+          {product.description}
         </p>
+      )}
 
-        {product.discount > 0 && (
-          <p className="text-[11px] text-ink-soft line-through">
-            {formatPrice(product.originalPrice)}
+      {/* Price + Reviews */}
+      <div className="my-1.5 flex items-center justify-between gap-2">
+        <div className="flex items-baseline gap-1.5">
+          <p className="text-[13.5px] font-extrabold text-pink-deep">
+            {formatPrice(product.price)}
+          </p>
+
+          {product.discount > 0 && (
+            <p className="text-[11px] text-ink-soft line-through">
+              {formatPrice(product.originalPrice)}
+            </p>
+          )}
+        </div>
+
+        {product.rating !== null && product.rating !== undefined ? (
+          <p className="shrink-0 text-[10.5px] font-bold text-ink-soft">
+            <span className="text-pink-deep">★</span>{" "}
+            {product.rating.toFixed(1)}
+            <span className="font-semibold">
+              {" "}
+              ({product.reviewCount})
+            </span>
+          </p>
+        ) : (
+          <p className="shrink-0 text-[10.5px] font-semibold text-ink-soft">
+            No reviews
           </p>
         )}
       </div>
 
+      {/* Colour options */}
       <div className="mb-2.5 h-[14px]">
         {colors.length > 1 && (
           <div className="flex gap-1.5">
@@ -153,6 +185,7 @@ export default function ProductCard({ product, accent = "pink" }) {
         )}
       </div>
 
+      {/* Cart controls */}
       <div className="mt-auto pt-2">
         {soldOut ? (
           <a
@@ -165,7 +198,9 @@ export default function ProductCard({ product, accent = "pink" }) {
           <div className="am-pop mb-2.5 flex items-center justify-between rounded-full bg-pink/15 p-1">
             <button
               aria-label={
-                inCart.qty === 1 ? "Remove item from cart" : "Decrease quantity"
+                inCart.qty === 1
+                  ? "Remove item from cart"
+                  : "Decrease quantity"
               }
               onClick={() => updateQty(cartId, inCart.qty - 1)}
               className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white transition hover:scale-105"

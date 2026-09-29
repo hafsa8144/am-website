@@ -51,10 +51,12 @@ export default function ReviewForm({ product }) {
     <section className="mt-6 rounded-3xl border border-line bg-card p-5 shadow-soft sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-xl font-extrabold text-ink">Write a review</h2>
-          <p className="mt-1 text-sm text-ink-soft">
-            Your review is checked before it is published.
-          </p>
+          <h2 className="text-xl font-extrabold text-ink">
+            Add a review
+          </h2>
+           <p className="mt-1 text-sm text-ink-soft">
+            Share your experience with this product.
+        </p>
         </div>
 
         <button
@@ -68,7 +70,7 @@ export default function ReviewForm({ product }) {
 
       {status === "success" ? (
         <div className="mt-5 rounded-2xl bg-mint/40 p-4 text-sm font-semibold text-ink">
-          Thank you! Your review has been submitted for approval.
+          Thank you! Your review has been published successfully.
         </div>
       ) : (
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
