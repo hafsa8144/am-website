@@ -158,7 +158,7 @@ export default function Footer() {
             href={buildContactWhatsAppLink(settings.whatsappNumber)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] px-5 py-3 text-sm font-extrabold text-ink shadow-[0_8px_18px_rgba(163,240,232,.35)] transition hover:-translate-y-0.5"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-pink-deep bg-pink px-5 py-3 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"

@@ -63,7 +63,7 @@ export default function ProductCard({ product, accent = "pink" }) {
       >
         <div className="absolute left-2 top-2 z-10 flex flex-col items-start gap-1">
           {product.isPromoted && (
-            <span className="rounded-full bg-pink/25 px-2 py-0.5 text-[9.5px] font-extrabold text-pink-deep">
+            <span className="rounded-full bg-pink-deep px-2 py-0.5 text-[9.5px] font-extrabold text-white">
               PROMOTED
             </span>
           )}

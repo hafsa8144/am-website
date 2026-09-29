@@ -40,7 +40,7 @@ export default function ReviewForm({ product }) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="mt-6 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] px-5 py-2.5 text-sm font-extrabold text-ink transition hover:-translate-y-0.5 hover:shadow-lift"
+        className="mt-6 rounded-full bg-pink px-5 py-2.5 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:shadow-lift"
       >
         Write a review
       </button>
@@ -69,7 +69,7 @@ export default function ReviewForm({ product }) {
       </div>
 
       {status === "success" ? (
-        <div className="mt-5 rounded-2xl bg-mint/40 p-4 text-sm font-semibold text-ink">
+        <div className="mt-5 rounded-2xl bg-pink/30 p-4 text-sm font-semibold text-ink">
           Thank you! Your review has been published successfully.
         </div>
       ) : (

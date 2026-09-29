@@ -6,7 +6,7 @@ import { formatPrice } from "@/lib/strapi";
 
 // Type-ahead against the real catalogue. Queries are debounced so a fast
 // typist makes one request, not one per keystroke.
-export default function SearchBox({ onDone, className = "" }) {
+export default function SearchBox({ onDone, className = "", placeholder = "Search pens, notebooks, bags...", hideSubmit = false }) {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [open, setOpen] = useState(false);
@@ -67,15 +67,15 @@ export default function SearchBox({ onDone, className = "" }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           onFocus={() => setOpen(true)}
-          placeholder="Search pens, notebooks, bags..."
+                    placeholder={placeholder}
           aria-label="Search products"
           className="min-w-0 flex-1 bg-transparent px-1 py-1.5 text-sm font-semibold text-ink outline-none placeholder:font-normal placeholder:text-ink-soft"
         />
 
-        <button
+                <button
           type="submit"
           onClick={onDone}
-          className="hidden rounded-full bg-pink px-4 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5 sm:block"
+          className={`${hideSubmit ? "hidden" : "hidden sm:block"} rounded-full bg-pink px-4 py-2 text-xs font-extrabold text-white transition hover:-translate-y-0.5`}
         >
           Search
         </button>

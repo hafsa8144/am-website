@@ -8,7 +8,6 @@ import { useCart } from "@/lib/cart-context";
 import { useSiteSettings } from "@/lib/settings-context";
 import { buildContactWhatsAppLink } from "@/lib/whatsapp";
 
-
 const STATIC_LINKS_START = [
   ["Home", "/"],
   ["Shop", "/shop"],
@@ -51,6 +50,8 @@ export default function Header() {
   const settings = useSiteSettings();
   const pathname = usePathname();
   const searchRef = useRef(null);
+  const mobileSearchRef = useRef(null);
+  const mobileSearchButtonRef = useRef(null);
   const navRef = useRef(null);
   const [compact, setCompact] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -59,28 +60,31 @@ export default function Header() {
   const compactLockUntil = useRef(0);
   const navLinks = [...STATIC_LINKS_START, ...STATIC_LINKS_END];
 
-
   useEffect(() => {
-  if (!searchOpen) return;
+    if (!searchOpen) return;
 
-  const onClickOutside = (event) => {
-    if (searchRef.current && !searchRef.current.contains(event.target)) {
-      setSearchOpen(false);
-    }
-  };
+    const onClickOutside = (event) => {
+      const target = event.target;
+      const inside =
+        (searchRef.current && searchRef.current.contains(target)) ||
+        (mobileSearchRef.current && mobileSearchRef.current.contains(target)) ||
+        (mobileSearchButtonRef.current &&
+          mobileSearchButtonRef.current.contains(target));
+      if (!inside) setSearchOpen(false);
+    };
 
-  const onKeyDown = (event) => {
-    if (event.key === "Escape") setSearchOpen(false);
-  };
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setSearchOpen(false);
+    };
 
-  document.addEventListener("mousedown", onClickOutside);
-  window.addEventListener("keydown", onKeyDown);
+    document.addEventListener("mousedown", onClickOutside);
+    window.addEventListener("keydown", onKeyDown);
 
-  return () => {
-    document.removeEventListener("mousedown", onClickOutside);
-    window.removeEventListener("keydown", onKeyDown);
-  };
-}, [searchOpen]);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [searchOpen]);
 
   useEffect(() => {
     let frame;
@@ -184,15 +188,14 @@ export default function Header() {
           compact ? "py-1" : "py-2"
         }`}
       >
-         <div
+        <div
           className={`relative flex items-center transition-[min-height] ${COLLAPSE_TRANSITION} ${
             compact ? "min-h-[56px]" : "min-h-[128px]"
           }`}
         >
           <a
-                      
             href="/"
-            className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2"
+            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 sm:left-1/2 sm:-translate-x-1/2"
             aria-label={`${settings.companyName} home`}
           >
             <img
@@ -200,28 +203,32 @@ export default function Header() {
               alt={`${settings.companyName} — ${settings.tagline}`}
               style={{ willChange: "height" }}
               className={`w-auto object-contain transition-[height] ${COLLAPSE_TRANSITION} ${
-                compact ? "h-[84px]" : "h-[208px]"
+                compact ? "h-[72px]" : "h-[176px]"
               }`}
             />
           </a>
 
-                    <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex min-w-0 items-center gap-2">
             <div
-              className={`hidden w-[350px] transition-[opacity,width] ${COLLAPSE_TRANSITION} lg:block ${
+              className={`hidden w-[400px] min-w-0 max-w-full transition-[opacity,width] ${COLLAPSE_TRANSITION} lg:block ${
                 compact ? "invisible w-0 opacity-0" : ""
               }`}
             >
               <SearchBox />
             </div>
 
-            <div
+             <div
               ref={searchRef}
-              className={`h-12 overflow-hidden transition-[width] ${COLLAPSE_TRANSITION} ${
-                compact ? "grid" : "grid lg:hidden"
-              } ${searchOpen ? "w-[190px] xs:w-[230px] sm:w-[300px]" : "w-12"}`}
+              className={`hidden h-12 origin-right transition-[width] ${COLLAPSE_TRANSITION} ${
+                compact ? "sm:grid" : "sm:grid lg:hidden"
+              } ${searchOpen ? "w-[230px] -translate-x-3 sm:w-[300px] sm:-translate-x-6" : "w-12"}`}
             >
               {searchOpen ? (
-                <SearchBox className="w-full" onDone={() => setSearchOpen(false)} />
+                <SearchBox
+                  className="w-full"
+                  placeholder="Search..."
+                  onDone={() => setSearchOpen(false)}
+                />
               ) : (
                 <button
                   onClick={() => setSearchOpen(true)}
@@ -236,15 +243,28 @@ export default function Header() {
                 </button>
               )}
             </div>
+
+            <button
+              ref={mobileSearchButtonRef}
+              onClick={() => setSearchOpen((open) => !open)}
+              aria-label="Open search"
+              className="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-line bg-card transition hover:-translate-y-0.5 hover:border-pink hover:bg-pink/10 sm:hidden"
+            >
+              <img
+                src="/icons/search.png"
+                alt="Search"
+                className="h-6 w-6 object-contain"
+              />
+            </button>
             <a
               href={buildContactWhatsAppLink(settings.whatsappNumber)}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contact us on WhatsApp"
-              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] text-ink transition hover:-translate-y-0.5 sm:grid"
+              className="hidden h-12 w-12 place-items-center rounded-full border-2 border-pink-deep bg-pink text-ink transition hover:-translate-y-0.5 sm:grid"
             >
               <img
-                src="/icons/whatsapp.svg"
+                src="/icons/whatsapp copy.svg"
                 alt=""
                 className="h-6 w-6 object-contain"
               />
@@ -266,7 +286,16 @@ export default function Header() {
               </span>
             </a>
           </div>
+        </div>
+
+        {searchOpen && (
+          <div
+            ref={mobileSearchRef}
+            className="am-fade-up relative z-40 px-1 pb-3 pt-1 sm:hidden"
+          >
+            <SearchBox className="w-full" onDone={() => setSearchOpen(false)} />
           </div>
+        )}
 
         <div
           className={`relative overflow-hidden transition-[max-height,opacity] ${COLLAPSE_TRANSITION} ${
@@ -292,7 +321,9 @@ export default function Header() {
             {navLinks.map(([label, href]) => {
               const active =
                 href === "/" ? pathname === "/" : pathname.startsWith(href);
-              const featured = ["Policies", "Terms & conditions"].includes(label);
+              const featured = ["Policies", "Terms & conditions"].includes(
+                label,
+              );
 
               return (
                 <a

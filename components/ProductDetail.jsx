@@ -87,7 +87,7 @@ export default function ProductDetail({ product }) {
       </div>
 
       <div>
-        <p className="text-[11px] font-extrabold uppercase tracking-[.14em] text-pink-deep">
+        <p className="text-[18px] font-extrabold uppercase tracking-[.14em] text-pink-deep">
           {product.brand}
         </p>
 
@@ -113,18 +113,18 @@ export default function ProductDetail({ product }) {
 
           {product.discount > 0 && (
             <>
-              <p className="text-sm text-ink-soft line-through">
+              <p className="text-[18px] text-ink-soft line-through">
                 {formatPrice(product.originalPrice)}
               </p>
 
-              <span className="rounded-full bg-discount px-2.5 py-1 text-[11px] font-extrabold text-white">
+              <span className="rounded-full bg-discount px-4 py-2 text-[14px] font-extrabold text-white">
                 Save {product.discount}%
               </span>
             </>
           )}
         </div>
 
-        <p className="mt-2 text-xs font-extrabold">
+        <p className="text-[18px] mt-2 text-xs font-extrabold">
           {soldOut ? (
             <span className="text-discount">Out of stock</span>
           ) : product.stock !== null && product.stock <= 5 ? (
@@ -211,7 +211,7 @@ export default function ProductDetail({ product }) {
         ) : (
           <button
             onClick={() => addItems(1, product, colour)}
-            className="mt-6 w-full rounded-full bg-pink-deep py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:brightness-105"
+            className="mt-6 w-full rounded-full bg-pink py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:brightness-105"
           >
             Add to cart
           </button>
@@ -230,7 +230,7 @@ export default function ProductDetail({ product }) {
           href={buildProductWhatsAppLink(settings.whatsappNumber, product)}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] px-5 py-3 text-sm font-extrabold text-ink shadow-[0_8px_18px_rgba(163,240,232,.35)] transition hover:-translate-y-0.5"
+          className="mt-3 flex items-center justify-center gap-2 rounded-full bg-pink px-5 py-3 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
         >
           <img
             src="/icons/whatsapp.svg"
@@ -240,7 +240,7 @@ export default function ProductDetail({ product }) {
           Ask about this on WhatsApp
         </a>
 
-        <p className="mt-4 rounded-2xl bg-violet/20 p-3 text-[11px] leading-relaxed text-ink">
+        <p className="mt-4 rounded-2xl bg-pink/30 p-3 text-[14px] leading-relaxed text-ink">
           {settings.deliveryNote}
         </p>
       </div>

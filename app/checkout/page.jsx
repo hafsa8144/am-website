@@ -163,7 +163,7 @@ export default function CheckoutPage() {
           </p>
 
           <form onSubmit={handleCompleteOrder} className="mt-6 grid gap-4 sm:grid-cols-2">
-            <div className="rounded-2xl bg-violet/20 p-4 text-xs leading-relaxed text-ink sm:col-span-2">
+            <div className="rounded-2xl bg-pink p-4 text-xs leading-relaxed text-ink sm:col-span-2">
               <strong>Delivery charges:</strong>
               <br />
               {settings.deliveryNote} They are not included in the subtotal
@@ -284,7 +284,7 @@ export default function CheckoutPage() {
             <button
               type="submit"
               disabled={count === 0 || isSubmitting}
-              className="rounded-full bg-pink-deep px-5 py-3 text-xs font-extrabold text-white transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-40 sm:col-span-2"
+              className="rounded-full bg-pink px-5 py-3 text-xs font-extrabold text-white transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-40 sm:col-span-2"
             >
               {isSubmitting ? "Placing order…" : "Complete order"}
             </button>
@@ -341,7 +341,7 @@ export default function CheckoutPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-pink bg-pink text-ink -[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full border-2 border-pink-deep bg-pink text-ink -[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"

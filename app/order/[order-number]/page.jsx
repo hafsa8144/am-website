@@ -175,7 +175,7 @@ export default function OrderConfirmationPage() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleSend}
-            className="mt-4 flex items-center justify-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] px-5 py-3.5 text-sm font-extrabold text-white shadow-[0_8px_18px_rgba(37,211,102,.35)] transition hover:-translate-y-0.5"
+            className="mt-4 flex items-center justify-center gap-2 rounded-full border-2 border-pink-deep bg-pink px-5 py-3.5 text-sm font-extrabold text-ink shadow-[0_8px_18px_rgba(37,211,102,.35)] transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"
@@ -186,7 +186,7 @@ export default function OrderConfirmationPage() {
           </a>
         </section>
 
-        <div className="mt-7 divide-y divide-line rounded-2xl border border-line text-left">
+        <div className="mt-7 divide-y divide-line overflow-hidden rounded-2xl border border-line text-left">
           <div className="bg-violet/20 px-4 py-3 text-xs leading-relaxed text-ink">
             <strong>Delivery charges are not included.</strong>
             <br />
