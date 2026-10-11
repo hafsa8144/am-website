@@ -148,14 +148,9 @@ export default function ProductCard({ product, accent = "pink" }) {
           )}
         </div>
 
-        {product.rating !== null && product.rating !== undefined ? (
+        {product.reviewCount > 0 ? (
           <p className="shrink-0 text-[10.5px] font-bold text-ink-soft">
-            <span className="text-pink-deep">★</span>{" "}
-            {product.rating.toFixed(1)}
-            <span className="font-semibold">
-              {" "}
-              ({product.reviewCount})
-            </span>
+            {product.reviewCount} {product.reviewCount === 1 ? "review" : "reviews"}
           </p>
         ) : (
           <p className="shrink-0 text-[10.5px] font-semibold text-ink-soft">

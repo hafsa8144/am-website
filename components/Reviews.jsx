@@ -3,10 +3,10 @@
 // has approved it in the admin.
 
 const TINTS = [
-  "bg-[#D9FFF2]",
-  "bg-[#E5F7FF]",
-  "bg-[#EEE5FF]",
-  "bg-[#FFE6DF]",
+  "bg-[#FFE4EE]",
+  "bg-[#FFD9E6]",
+  "bg-[#FFEBF2]",
+  "bg-[#FFDFE6]",
 ];
 
 export function Stars({ rating = 0, className = "" }) {

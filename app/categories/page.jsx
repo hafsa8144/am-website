@@ -118,11 +118,11 @@ export default async function CategoriesPage() {
                     {category.description || "Explore this category"}
                   </p>
 
-                  <span className="mt-4 inline-flex items-center text-[11px] font-extrabold text-ink group-hover:text-pink-deep">
-                    Shop category
-                    <span className="ml-1 transition group-hover:translate-x-1">
-                      →
-                    </span>
+                  <span className="mt-3 inline-flex text-xs font-extrabold text-pink-deep">
+                Shop category
+                <span className="ml-1 transition group-hover:translate-x-1">
+                  →
+                </span>
                   </span>
                 </div>
               </a>

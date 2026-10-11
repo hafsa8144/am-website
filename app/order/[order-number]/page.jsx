@@ -86,7 +86,7 @@ export default function OrderConfirmationPage() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-[#B2A3FF] bg-[#E9DFFF] shadow-[0_8px_18px_rgba(178,163,255,.35)] px-5 py-3 text-sm font-extrabold text-ink"
+            className="mt-6 inline-flex items-center gap-2 rounded-full border-2 border-pink-deep bg-pink px-5 py-3 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"
@@ -151,20 +151,28 @@ export default function OrderConfirmationPage() {
         </p>
 
         {/* Step 2 of ordering: the message that actually reaches the shop. */}
-        <section
+                <section
           className={`mt-7 rounded-3xl border-2 p-5 text-left ${
             sent
               ? "border-[#b7dfc8] bg-[#eef8f1]/90"
-              : "border-[#72cfc0] bg-mint/40"
+              : "border-ink bg-ink"
           }`}
         >
-          <h2 className="text-base font-extrabold text-ink">
+          <h2
+            className={`text-base font-extrabold ${
+              sent ? "text-ink" : "text-white"
+            }`}
+          >
             {sent
               ? "Order details sent on WhatsApp"
               : "One last step — send us the details"}
           </h2>
 
-          <p className="mt-1 text-sm leading-relaxed text-ink-soft">
+          <p
+            className={`mt-1 text-sm leading-relaxed ${
+              sent ? "text-ink-soft" : "text-white/80"
+            }`}
+          >
             {sent
               ? "We have your order. If WhatsApp did not open, use the button again."
               : "Tap below and WhatsApp opens with your full order ready to send. We reply with the delivery charge and confirm your order."}
@@ -175,7 +183,7 @@ export default function OrderConfirmationPage() {
             target="_blank"
             rel="noopener noreferrer"
             onClick={handleSend}
-            className="mt-4 flex items-center justify-center gap-2 rounded-full border-2 border-pink-deep bg-pink px-5 py-3.5 text-sm font-extrabold text-ink shadow-[0_8px_18px_rgba(37,211,102,.35)] transition hover:-translate-y-0.5"
+            className="mt-4 flex items-center justify-center gap-2 rounded-full border-2 border-pink-deep bg-pink px-5 py-3.5 text-sm font-extrabold text-ink transition hover:-translate-y-0.5"
           >
             <img
               src="/icons/whatsapp.svg"
@@ -187,7 +195,7 @@ export default function OrderConfirmationPage() {
         </section>
 
         <div className="mt-7 divide-y divide-line overflow-hidden rounded-2xl border border-line text-left">
-          <div className="bg-violet/20 px-4 py-3 text-xs leading-relaxed text-ink">
+                    <div className="bg-pink/20 px-4 py-3 text-xs leading-relaxed text-ink">
             <strong>Delivery charges are not included.</strong>
             <br />
             {settings.deliveryNote}

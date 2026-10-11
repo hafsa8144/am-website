@@ -2,6 +2,7 @@ import { Baloo_2, Nunito } from "next/font/google";
 import { CartProvider } from "@/lib/cart-context";
 import { SiteProvider } from "@/lib/settings-context";
 import { getCategories, getSiteSettings } from "@/lib/api";
+import SplashScreen from "@/components/SplashScreen";
 import "./globals.css";
 
 const baloo = Baloo_2({
@@ -35,7 +36,9 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" className={`${baloo.variable} ${nunito.variable}`}>
-      <body className="font-sans text-ink">
+            <body className="font-sans text-ink">
+        <SplashScreen />
+
         <SiteProvider settings={settings} categories={categories}>
           <CartProvider>
             <div id="am-root">{children}</div>
