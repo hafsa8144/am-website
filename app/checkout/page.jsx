@@ -198,26 +198,26 @@ export default function CheckoutPage() {
             </label>
 
             <label className="text-xs font-extrabold text-ink sm:col-span-2">
-              Street address
+              Address
               <input
                 required
                 name="streetAddress"
                 value={form.streetAddress}
                 onChange={handleChange}
                 autoComplete="street-address"
-                placeholder="House / street / area"
+                placeholder="Building Name, Floor, Room, Street Area, Road"
                 className={fieldStyle}
               />
             </label>
 
             <label className="text-xs font-extrabold text-ink sm:col-span-2">
-              Apartment, building, floor or landmark{" "}
+              Additional Address{" "}
               <span className="font-semibold text-ink-soft">(optional)</span>
               <input
                 name="landmark"
                 value={form.landmark}
                 onChange={handleChange}
-                placeholder="Apartment, building name, floor, or nearby landmark"
+                placeholder="Connecting Road, Nearby/Opposite Landmark"
                 className={fieldStyle}
               />
             </label>

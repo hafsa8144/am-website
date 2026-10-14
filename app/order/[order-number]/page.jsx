@@ -195,7 +195,7 @@ export default function OrderConfirmationPage() {
         </section>
 
         <div className="mt-7 divide-y divide-line overflow-hidden rounded-2xl border border-line text-left">
-                    <div className="bg-pink/20 px-4 py-3 text-xs leading-relaxed text-ink">
+                    <div className="bg-[#FFD9E6] px-4 py-3 text-xs leading-relaxed text-ink">
             <strong>Delivery charges are not included.</strong>
             <br />
             {settings.deliveryNote}
